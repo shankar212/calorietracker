@@ -84,6 +84,8 @@ The frontend strictly manages presentation and triggers state requests:
 <img width="959" height="419" alt="image" src="https://github.com/user-attachments/assets/4424feb6-08b7-4500-8ab9-ac36f375d98e" />
 <img width="959" height="420" alt="image" src="https://github.com/user-attachments/assets/5584b8ab-84d6-4fb1-82da-1accedadf6e5" />
 <img width="952" height="377" alt="image" src="https://github.com/user-attachments/assets/1252a9b8-f82a-4f5f-9182-9e1666783a4b" />
+<img width="953" height="391" alt="image" src="https://github.com/user-attachments/assets/65ae64bb-9bd0-4734-8972-409c96cf266a" />
+
 
 
 
