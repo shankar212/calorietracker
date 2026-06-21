@@ -1,30 +1,30 @@
 # CaloMacro: Calorie Tracker & Macro Dashboard
 
-CaloMacro is a modern, high-fidelity health-tracking prototype designed as a user's daily food journal. The application is built using **Next.js App Router (TypeScript + Vanilla CSS)** with a clean architecture where all business logic, calorie/macro computations, data scaling, and state validations are implemented strictly on the **server side**.
+CaloMacro is a modern health-tracking prototype built with **Next.js App Router**, **TypeScript**, and **vanilla CSS**. The app separates presentation from data logic by using a client-side dashboard component in `src/app/page.tsx` and server-side route handlers in `src/app/api/`.
 
 ---
 
 ## 🏗️ Architectural Overview
 
-The application is structured into a presentation layer (Frontend) and a computational engine layer (Backend API), ensuring a separation of concerns:
+The application is structured into a client-rendered dashboard and server-side API routes backed by an in-memory state store:
 
 ```mermaid
 graph TD
-    subgraph Client-Side (Presentation)
-        UI[React Dashboard - page.tsx]
-        Form[Logging Card Inputs]
-        Bar[Calorie Progress Bar]
-        Meters[Macronutrient Meters]
-        Scanner[Simulated AI Scanner]
-        Modal[Exceeded Warning Modal]
+    subgraph ClientPresentation["Client-Side (Presentation)"]
+        UI["React Dashboard - page.tsx"]
+        Form["Logging Card Inputs"]
+        Bar["Calorie Progress Bar"]
+        Meters["Macronutrient Meters"]
+        Scanner["Simulated AI Scanner"]
+        Modal["Exceeded Warning Modal"]
     end
 
-    subgraph Server-Side (Computation)
-        StateAPI[api/state/route.ts]
-        MealsAPI[api/meals/route.ts]
-        ScanAPI[api/mock-scan/route.ts]
-        Store[lib/stateStore.ts - Global Store]
-        DB[(Food Database & Targets)]
+    subgraph ServerComputation["Server-Side (Computation)"]
+        StateAPI["api/state/route.ts"]
+        MealsAPI["api/meals/route.ts"]
+        ScanAPI["api/mock-scan/route.ts"]
+        Store["src/lib/stateStore.ts"]
+        DB[("Food Database & Targets")]
     end
 
     UI -->|GET Fetch State| StateAPI
@@ -39,11 +39,11 @@ graph TD
 ```
 
 ### 📁 Directory Layout
-- `src/types/index.ts` - TypeScript interfaces ensuring type safety across client and server.
-- `src/lib/stateStore.ts` - Core backend engine managing target metrics, baseline food database, global in-memory state persistence, and nutrient calculations.
-- `src/app/api/` - Next.js Route Handlers (REST Endpoints) wrapping state store operations.
-- `src/app/globals.css` - Custom Vanilla CSS stylesheet implementing dark modes, linear gradient progress bars, glassmorphism shadows/blurs, scanning animations, and modal overlays.
-- `src/app/page.tsx` - Client Dashboard managing input hooks, scanner delays, warning dialog visibility, and rendering the latest state from the API.
+- `src/types/index.ts` - Shared TypeScript interfaces used by both client and server code.
+- `src/lib/stateStore.ts` - Server-side shared state store and business logic. It holds meals, current goal, food metadata, and nutrient calculations in memory.
+- `src/app/api/` - Next.js Route Handlers (`/api/state`, `/api/meals`, `/api/mock-scan`) that expose state and mutate data through standard REST-style requests.
+- `src/app/globals.css` - App-wide vanilla CSS styling for the dashboard, cards, progress meters, scanner overlay, and modal controls.
+- `src/app/page.tsx` - Client component that renders the dashboard, handles form input, triggers API calls, and displays live state from the server.
 
 ---
 
@@ -95,15 +95,14 @@ Make sure you have Node.js (version 18 or later) installed.
 
 2. Run the local development server:
    ```bash
-   npm run dev
+   npm run dev -- --webpack
    ```
    Open [http://localhost:3000](http://localhost:3000) on your browser.
 
+   > On Windows, the project uses Webpack instead of Turbopack because native Turbopack bindings are not available for this platform.
+
 3. To build and test production compiles:
    ```bash
-   # Build the bundle with webpack
    npx next build --webpack
-   
-   # Start the production server
    npm run start
    ```
