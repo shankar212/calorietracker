@@ -79,6 +79,14 @@ The frontend strictly manages presentation and triggers state requests:
 *   **AI Photo Scanner**: Clicking the scanner initiates a visual scanning light overlay. The client enforces a realistic `1.2-second` scan delay to simulate image analysis before querying `/api/mock-scan` and autofilling the form inputs.
 *   **Exceeded Modal**: Shows a warnings dialog prompting the user when they overeat. A transition handler ensures it only pops up when the threshold is *first* crossed.
 *   **History Grid**: Renders meals in real-time. Clicking the trash button makes a `DELETE` request, updating the backend state and instantly reducing the progress meters.
+<img width="956" height="416" alt="image" src="https://github.com/user-attachments/assets/04fef184-9437-445c-a3a4-6f07a7359ad3" />
+<img width="959" height="422" alt="image" src="https://github.com/user-attachments/assets/b0a09b09-a052-444f-92de-a15d21b61319" />
+<img width="959" height="419" alt="image" src="https://github.com/user-attachments/assets/4424feb6-08b7-4500-8ab9-ac36f375d98e" />
+<img width="959" height="420" alt="image" src="https://github.com/user-attachments/assets/5584b8ab-84d6-4fb1-82da-1accedadf6e5" />
+<img width="952" height="377" alt="image" src="https://github.com/user-attachments/assets/1252a9b8-f82a-4f5f-9182-9e1666783a4b" />
+
+
+
 
 ---
 
